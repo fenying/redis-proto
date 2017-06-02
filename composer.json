@@ -1,0 +1,41 @@
+{
+    "name" : "fenying/redis-proto",
+    "description" : "A toolkits for Redis protocol, achieved in pure PHP.",
+    "type" : "library",
+    "license" : "Apache-2.0",
+    "autoload" : {
+        "psr-4" : {
+            "RedisProto\\" : "lib"
+        }
+    },
+    "homepage" : "https://fenying.net",
+    "support" : {
+        "email" : "i.am.x.fenying@gmail.com",
+        "issues" : "https://github.com/fenying/redis-proto/issues",
+        "source" : "https://github.com/fenying/redis-proto/"
+    },
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "authors" : [{
+            "name" : "Angus.Fenying",
+            "email" : "i.am.x.fenying@gmail.com",
+            "homepage" : "https://fenying.net",
+            "role" : "Master"
+        }
+    ],
+    "keywords" : [
+        "cache"
+    ],
+    "repositories" : [{
+            "type" : "git",
+            "url" : "git@github.com:fenying/redis-proto.git",
+            "name" : "Redis Protocol"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
