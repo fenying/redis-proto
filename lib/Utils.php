@@ -28,7 +28,13 @@ class Utils
         return $pos === false ? null : [substr($rawData, $offset, $pos - $offset), $pos];
     }
 
-    public function decode($rawText): int
+    /**
+     * Decode the data of redis protocol.
+     * @param string $rawText
+     * @throws \RedisProto\Exception
+     * @return int returns how many item was decoded.
+     */
+    public function decode(string $rawText): int
     {
         $ret = 0;
 
@@ -90,7 +96,7 @@ class Utils
                         goto endingLoop;
                     }
 
-                    throw new \Exception("Protocol Error: {$message}", E_PROTOCOL_FAILURE);
+                    throw new Exception($message, E_PROTOCOL_FAILURE);
 
                     $ret++;
 
@@ -148,7 +154,7 @@ class Utils
 
                 default:
 
-                    throw new \Exception('Unexpected token in Redis protocol.', E_PROTOCOL_FAILURE);
+                    throw new Exception('Unexpected token in Redis protocol.', E_PROTOCOL_FAILURE);
                 }
 
                 break;

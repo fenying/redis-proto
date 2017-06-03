@@ -90,7 +90,8 @@ displayData(fetchSingleResult($utils));
 $utils->decode(<<<PROTO
 *3\r
 \$3\r
-123\r
+1
+3\r
 +HEIHEIHEI\r
 :123\r
 

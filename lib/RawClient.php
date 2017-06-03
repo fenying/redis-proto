@@ -79,14 +79,23 @@ class RawClient
             $this->_doConnect();
         }
 
-        fwrite($this->_socket, $this->_encoder->encode($args));
+        try {
 
-        while ($ret = fread($this->_socket, 1024)) {
+            fwrite($this->_socket, $this->_encoder->encode($args));
 
-            if ($this->_encoder->decode($ret)) {
+            while ($ret = fread($this->_socket, 1024)) {
 
-                break;
+                if ($this->_encoder->decode($ret)) {
+
+                    break;
+                }
             }
+        }
+        catch (Exception $e) {
+
+            $this->close();
+
+            throw $e;
         }
 
         $ret = array_shift($this->_encoder->results);
@@ -99,6 +108,13 @@ class RawClient
         return $ret;
     }
 
+    protected function _close()
+    {
+        fclose($this->_socket);
+
+        $this->_socket = null;
+    }
+
     public function close()
     {
         if ($this->_config['persist'] || !$this->_socket) {
@@ -108,9 +124,7 @@ class RawClient
 
         $this->sendCommand('quit');
 
-        fclose($this->_socket);
-
-        $this->_socket = null;
+        $this->_close();
     }
 
     public function __destruct()
